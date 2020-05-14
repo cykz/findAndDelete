@@ -1,5 +1,7 @@
 #/bin/bash
 
+# 0 * * * * check every one hour /bin/bash /scripts/findAndDelete.sh
+
 DIRECTORY = /var/tmp
 COUNTER = $(find . -name "*.tmp" -mindepth 1 -mtime +1 -exec {} \; | wc -l)
 
