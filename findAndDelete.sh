@@ -2,9 +2,14 @@
 
 # 0 * * * * check every one hour /bin/bash /scripts/findAndDelete.sh
 
-DIRECTORY = /var/tmp
-COUNTER = $(find . -name "*.tmp" -mindepth 1 -mtime +1 -exec {} \; | wc -l)
-
+DIRECTORY=/var/tmp
 cd $DIRECTORY
-find . -name "*.tmp" -mindepth 1 -mtime +1 -delete #or we can use -exec rm -rf {} \;
-echo "$COUNTER files have been deleted"
+COUNTER=$(find . -name "*.tmp" -mtime +1 | wc -l)
+
+if [[ $COUNTER -gt 0 ]]
+then
+  find . -name "*.tmp" -mindepth 1 -mtime +1 -delete #or we can use -exec rm -rf {} \;
+  echo "$COUNTER files have been deleted"
+else
+  echo "$COUNTER files to delete"
+fi
