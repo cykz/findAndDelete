@@ -9,7 +9,7 @@ COUNTER=$(find . -name "*.tmp" -mtime +1 | wc -l)
 if [[ $COUNTER -gt 0 ]]
 then
   find . -name "*.tmp" -mindepth 1 -mtime +1 -delete #or we can use -exec rm -rf {} \;
-  echo "$COUNTER files have been deleted"
+  logger $COUNTER files have been deleted
 else
-  echo "$COUNTER files to delete"
+  logger $COUNTER files to delete
 fi
